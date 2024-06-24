@@ -4,7 +4,8 @@
 
 using namespace std;
 
- // Изменить путь прочтения и сохранения файлов, настроить запуск и компиляцию проекта
+// Изменить путь прочтения и сохранения файлов, настроить запуск и компиляцию
+// проекта
 
 bool IsLoggedIN() {
   string username, password, un, pw;
@@ -38,18 +39,19 @@ int main() {
     file.open("data\\" + username + ".txt");
     file << username << endl << password;
     file.close();
-
     main();
-  } else if (choice == 2) {
+  } 
+  else if (choice == 2) {
     bool status = IsLoggedIN();
     if (!status) {
       cout << "Обманщик!" << endl;
       system("Pause");
       return 0;
     }
-  } else {
+   else {
     cout << "Добро пожаловать!" << endl;
     system("PAUSE");
     return 1;
+    }
   }
-}
+};
