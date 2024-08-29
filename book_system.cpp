@@ -44,7 +44,7 @@ void book::showdata()	{
 	cout<<"\nStock Position: "<< *stock;   
 };
 int book::search(char tbuy[20],char abuy[20] )	{
-	if(strcmp(tbuy,title)==0 && strcmp(abuy,author)==0)
+	if(strcmp(tbuy,title)==0 && strcmp(abuy,author)==0)  // strcmp функция сравнения строк
 		return 1;
 	else return 0;
 };

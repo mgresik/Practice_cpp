@@ -40,6 +40,13 @@ int main() // Функция без параметров, на выходе фу
     if (iterations == 5)
       iter_state = false;
   }
+  int typeReverse(){
+    char ch(97);
+    std::cout << ch << std::endl;
+    std::cout << static_cast<int>(ch) << std::endl;   // static_cast меняет тип даных ТОЛЬКО В ЭТОЙ СТРОКЕ
+    std::cout << ch << std::endl;
+    return 0;
+  }  
 
   return 0; // Индикатор успешного завершения функции
 }
