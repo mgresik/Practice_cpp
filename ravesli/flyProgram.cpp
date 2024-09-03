@@ -8,6 +8,7 @@ double startDistance()
 {
     std::cout << "Enter Distance: ";
     double dist;
+    std::cin.ignore(32767, '\n');  // Игнорировать знак новой строки
     std::cin >> dist;
     return dist; 
 };
