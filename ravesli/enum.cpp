@@ -58,7 +58,7 @@ void printAnimals(Animals myPets)
 int main()
 {
     Monsters eMonsterType = MONSTER_OGRE;
-    Animals myHomepet(ANIMAL_CAT);  // Создание перечисления, в котором есть перечислители, описанные выше
+    Animals myHomepet(ANIMAL_CAT);
     int mypet = ANIMAL_CAT;  // Пременная получит значение 4
     std::cout << ANIMAL_DOG << std::endl;  // Выведется 3
     printAnimals(myHomepet);
