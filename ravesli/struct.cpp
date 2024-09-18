@@ -8,6 +8,14 @@ struct Warrior
     bool status;
 };
 
+struct Advertising
+{
+    int showNow;
+    int showPerMan;
+    int moneyPerClick;
+};
+
+void 
 
 int main()
 {

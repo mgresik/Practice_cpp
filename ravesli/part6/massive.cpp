@@ -22,6 +22,9 @@ int main()
 
     int array[] = { 7, 5, 6, 4, 9, 8, 2, 1, 3 };
     const int numVec = sizeof(array) / sizeof(array[0]);
-
+    for (int count = 0; numVec > count; count++)
+    {
+        std::cout << array[count];
+    }
     return 0;
 }
