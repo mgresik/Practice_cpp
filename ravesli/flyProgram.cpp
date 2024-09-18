@@ -1,49 +1,47 @@
 #include <iostream>
-#include <math.h>
 #include "constans.hpp"
-
-using namespace myConstants;
-
-double startDistance()
+ 
+// Получаем начальную высоту от пользователя и возвращаем её
+double getInitialHeight()
 {
-    std::cout << "Enter Distance: ";
-    double dist;
-    std::cin.ignore(32767, '\n');  // Игнорировать знак новой строки
-    std::cin >> dist;
-    return dist; 
-};
-
-double positionCheck(double distance, int timeFly)
-{
-    double distancePerSec = (myConstants::acceleration * timeFly * timeFly) / 2;
-    double currentPosition = distance - distancePerSec;
-    return currentPosition;
-};
-void printString(double currentPosition, int second)
-{
-    if (currentPosition != 0.0)
-    {
-        std::cout << "At " << second << " your distance is " << currentPosition << std::endl;
-    }
-    else
-    {
-        std::cout << "At " << second << " you are on ground";
-    };
-};
-void checkAndPrint(double distance, int time)
-{
-    double currentDistance = positionCheck(distance, time);
-    printString(currentDistance, time);
+	std::cout << "Enter the initial height of the tower in meters: ";
+	double initialHeight;
+	std::cin >> initialHeight;
+	return initialHeight;
 }
-
-int main(){
-    double initialDistance = startDistance();
-    checkAndPrint(initialDistance, 0);
-    checkAndPrint(initialDistance, 1);
-    checkAndPrint(initialDistance, 2);
-    checkAndPrint(initialDistance, 3);
-    checkAndPrint(initialDistance, 4);
-    checkAndPrint(initialDistance, 5);
-
-    return 0;
-};
+ 
+// Возвращаем расстояние от земли после "..." секунд падения
+double calculateHeight(double initialHeight, int seconds)
+{
+	// Используем формулу: [ s = u * t + (a * t^2) / 2 ], где u(начальная скорость) = 0
+	double distanceFallen = (myConstants::gravity * seconds * seconds) / 2;
+	double currentHeight = initialHeight - distanceFallen;
+ 
+	return currentHeight;
+}
+ 
+// Выводим высоту, на которой находится мячик после каждой секунды падения 
+void printHeight(double height, int seconds)
+{
+	if (height > 0.0)
+		std::cout << "At " << seconds << " seconds, the ball is at height: " << height << " meters\n";
+	else
+		std::cout << "At " << seconds << " seconds, the ball is on the ground.\n";
+}
+ 
+int main()
+{
+	const double initialHeight = getInitialHeight();
+ 
+	int seconds = 0;
+	double height;
+ 
+	do
+	{
+		height = calculateHeight(initialHeight, seconds);
+		printHeight(height, seconds);
+		++seconds;
+	} while (height > 0.0);
+ 
+	return 0;
+}
