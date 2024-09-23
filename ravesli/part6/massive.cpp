@@ -36,24 +36,7 @@ int main()
  
     // Дальше выводим массив на экран
     int array[] = { 7, 5, 6, 4, 9, 8, 2, 1, 3 };
-    const int arrayLength = sizeof(array) / sizeof(array[0]);
- 
-    for (int index=0; index < arrayLength; ++index)
-        std::cout << array[index] << " ";
- 
-    std::cout << "\n";
- 
-    // Затем ищем в массиве число, которое ввел пользователь и выводим его индекс
-    for (int index=0; index < arrayLength; ++index)
-    {
-        if (array[index] == number)
-        {
-            std::cout <<  "The number " << number << " has index " <<  index << "\n";
-            break; // так как каждый элемент в массиве уникальный, то нет надобности продолжать перебирать элементы дальше
-        }
-    }
- 
-    return 0;
+    const int numVec = sizeof(array) / sizeof(array[0]);
 
     return 0;
 }
