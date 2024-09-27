@@ -81,10 +81,10 @@ int getCardValue(const Card &card)
    case eight:        std::cout << "8"; break;
    case nine:         std::cout << "9"; break;
    case then:         std::cout << "10"; break;
-   case valet:        std::cout << "V"; break;
-   case ledy:         std::cout << "D"; break;
-   case king:         std::cout << "K"; break;
-   case tuz:          std::cout << "T"; break;
+   case valet:        std::cout << "10"; break;
+   case ledy:         std::cout << "10"; break;
+   case king:         std::cout << "10"; break;
+   case tuz:          std::cout << "11"; break;
    }
 }
 
