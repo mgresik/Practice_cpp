@@ -66,29 +66,97 @@ void schuffleDeck(std::array<Card, 52> &deck)
    }
 }
 
-bool playBlackjack(const std::array<Card, 52> &deck)
+int getCardValue(const Card &card)
 {
-    std::cout << "Добро пожаловать в 21-о. Давай начнём.\n";
-    std::cout << "Вот твоя первая карта";
+   switch (card.type)
+   {
+   case two:          std::cout << "2"; break;
+   case tree:         std::cout << "3"; break;
+   case vour:         std::cout << "4"; break;
+   case five:         std::cout << "5"; break;
+   case six:          std::cout << "6"; break;
+   case seven:        std::cout << "7"; break;
+   case eight:        std::cout << "8"; break;
+   case nine:         std::cout << "9"; break;
+   case then:         std::cout << "10"; break;
+   case valet:        std::cout << "10"; break;
+   case ledy:         std::cout << "10"; break;
+   case king:         std::cout << "10"; break;
+   case tuz:          std::cout << "11"; break;
+   }
 
-    return true;
+   return 0;
+}
+
+char getPlayerChoice()
+{
+	std::cout << "(h) to hit, or (s) to stand: ";
+	char choice;
+	do
+	{
+		std::cin >> choice;
+	} while (choice != 'h' && choice != 's');
+	
+	return choice;
+}
+
+bool playBlackjack(const std::array<Card, 52> &deck)
+{ 
+   const Card *cardPtr = &deck[0];
+   std::cout << "Добро пожаловать в 21-о. Давай начнём.\n";
+   std::cout << "Вот твоя первая карта";
+   int playerScore;
+   int dealerScore;
+
+   dealerScore += getCardValue(*cardPtr++);
+   std::cout << "The dealer is showing: " << dealerScore << '\n';
+   playerScore += getCardValue(*cardPtr++);
+	playerScore += getCardValue(*cardPtr++);
+
+   while (1)
+   {
+      std::cout << "You have: " << playerScore << '\n';
+      if (playerScore > 21)
+         return false;
+      char choice = getPlayerChoice();
+      if (choice == 's')
+      {
+         break;
+      }
+      playerScore +=getCardValue(*cardPtr++);
+   }
+   while (dealerScore < 17)
+   {
+      dealerScore += getCardValue(*cardPtr++);
+      std::cout << "The dealer now has: " << dealerScore << '\n';
+   }
+   if (dealerScore > 21)
+		return true;
+ 
+	return (playerScore > dealerScore);
 }
 
 int main()
 {
-    srand(static_cast<unsigned int>(time(0)));
-    rand();
-    std::array<Card, 52> deck;
-    int card = 0;
+   srand(static_cast<unsigned int>(time(0)));
+   rand();
+   std::array<Card, 52> deck;
+   int card = 0;
 
-    schuffleDeck(deck);
+   for (int mast = 0; mast < all_masti; ++mast)
+	for (int type = 0; type < all_types; ++type)
+	{
+		deck[card].mast = static_cast<mastis>(mast);
+		deck[card].type = static_cast<types>(type);
+		++card;
+   }
 
+   schuffleDeck(deck);
 
-
-    if (playBlackjack(deck))
+   if (playBlackjack(deck))
 		std::cout << "You win!\n";
 	else
 		std::cout << "You lose!\n";
 
-
+   return 0;
 }
