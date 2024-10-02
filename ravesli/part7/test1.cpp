@@ -1,7 +1,6 @@
 #include <iostream>
 
 typedef int (*arithmeticFcn)(int, int);
-
 char getAction()
 {
     while (true)
@@ -19,7 +18,6 @@ char getAction()
         }
     }
 }
-
 
 int add(int x, int y)
 {
