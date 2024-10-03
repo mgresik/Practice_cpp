@@ -38,6 +38,11 @@ int main()
  
     today.m_day = 18; // используем оператор выбора членов для выбора переменной-члена m_day объекта today класса DateClass
     today.print(); // используем оператор выбора членов для вызова метода print() объекта today класса DateClass
- 
+    
+    Numbers numb;
+
+    numb.set(5, 4);
+    numb.print;
+    
     return 0;
 }
