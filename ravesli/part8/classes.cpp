@@ -12,6 +12,25 @@ public:
         std::cout << m_day << "/" << m_month << "/" << m_year;
     }
 };
+
+class Numbers
+{
+    public:
+        int a;
+        int b;
+
+        int set(int x, int y)
+        {
+            a = x;
+            b = y;
+            return 0;
+        }
+
+        void print()
+        {
+            std::cout << a << b;
+        }
+}
  
 int main()
 {
