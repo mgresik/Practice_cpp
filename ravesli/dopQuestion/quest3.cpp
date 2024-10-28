@@ -1,19 +1,30 @@
 #include <iostream>
 #include <string>
 
-
+double skidka(double& price)
+{
+    if (price > 1000)
+    {
+        return 5;
+    }
+    else if (price > 500)
+    {
+        return 3;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 int main()
 {
-    int s;
-    std::cout << "Введите дистанцию\n";
-    std::cin >> s;
-    int benzPerSec;
-    std::cout << "Введите расход на 100 км\n";
-    std::cin >> benzPerSec;
-    int costPerLitr;
-    std::cout << "Введите стоимость бензина за 1 литр\n";
-    std::cin >> costPerLitr;
+    std::cout << "Введите стоимость покупки \n";
+    double price;
+    std::cin >> price;
+    std::cout << "Вам предоставлена скидка в размере " << skidka(price) << "%\n";
+    double itog = price - (price * (skidka(price) / 100));
+    std::cout << "Стоимость с учетом скидки " << itog;
 
-    std::cout <<  
+    return 0;
 }
