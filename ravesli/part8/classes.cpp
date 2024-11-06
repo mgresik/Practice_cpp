@@ -16,6 +16,8 @@ public:
 class Numbers
 {
     public:
+        Numbers() : a(5), b(6){}  // Инициализация без присваивания
+        
         int a;
         int b;
 
@@ -31,6 +33,17 @@ class Numbers
             std::cout << a << b;
         }
 }
+
+class Values
+{
+private:
+    const int m_value;
+ 
+public:
+    Values(): m_value(7) // напрямую инициализируем константную переменную-член, запрет только на изменение
+    {
+    } 
+};
  
 int main()
 {
