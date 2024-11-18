@@ -1,5 +1,13 @@
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+int getRandomNumber(int min, int max)
+{
+    static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);
+	return static_cast<int>(rand() * fraction * (max - min + 1) + min);
+}
 
 class Creature
 {
@@ -45,14 +53,14 @@ public:
 
 class Monster : public Creature
 {
-private:
+public:
     enum Type
     {
         Dragon,
         Orc,
         Slime,
         MAX_TYPES,
-    }
+    };
     struct MonsterData
     {
         const char* name;
@@ -63,9 +71,13 @@ private:
     };
     static MonsterData monsterData[MAX_TYPES];
 
-    Monster(Type type) : Creature(monsterData[type].name, monsterData[type].symbol, monsterData[type].health, monsterData[type].damage, monsterData[type].gold)
+    Monster(Type type) : Creature(monsterData[type].name, monsterData[type].symbol, monsterData[type].health, monsterData[type].damage, monsterData[type].gold){}
 
-    
+    static Monster getRandomMonster()
+    {
+	    int number = getRandomNumber(0, MAX_TYPES - 1);
+	    return Monster(static_cast<Type>(number));
+    }
 };
 
 Monster::MonsterData Monster::monsterData[Monster::MAX_TYPES]
@@ -75,22 +87,42 @@ Monster::MonsterData Monster::monsterData[Monster::MAX_TYPES]
 	{ "slime", 's', 1, 1, 10 }
 };
 
+void fightMonster()
+{
+    
+}
+
 int main()
 {
-	Creature o("orc", 'o', 4, 2, 10);
-	o.addGold(5);
-	o.reduceHealth(1);
-	std::cout << "The " << o.getName() << " has " << o.getHealth() << " health and is carrying " << o.getGold() << " gold." << std::endl;
+    srand(static_cast<unsigned int>(time(0)));
+	rand();
 
-    std::cout << "Введите имя персонажа" << std::endl;
-    std::string namePerson;
-    std::cin >> namePerson;
-    Player p(namePerson);
-    std::cout << "Welcome, " << p.getName() << std::endl;
-    std::cout << "You have " << p.getHealth() << " health and are carrying " << p.getGold() << " gold." << std::endl;
+    std::cout << "Welcome to my game!";
+    std::cout << "Enter the name of player \n";
+    std::string playerName;
+    std::cin >> playerName;
 
-    Monster m(Monster::ORC);
-	std::cout << "A " << m.getName() << " (" << m.getSymbol() << ") was created.\n";
+    Player p(playerName);
+    std::cout << p.getName() << '\n';
+    while (!(p.isDead()))
+    {
+        Monster m = Monster::getRandomMonster();
+        std::cout << "You see a " << m.getName() << ' ' << m.getSimvol();
+
+
+
+    }
     
+
+    
+    
+    
+    
+    // for (int i = 0; i < 10; ++i)
+	// {
+	// 	Monster m = Monster::getRandomMonster();
+	// 	std::cout << "A " << m.getName() << " (" << m.getSimvol() << ") was created.\n";
+	// }
+
 	return 0;
 }
