@@ -108,21 +108,8 @@ int main()
     {
         Monster m = Monster::getRandomMonster();
         std::cout << "You see a " << m.getName() << ' ' << m.getSimvol();
-
-
+        
 
     }
-    
-
-    
-    
-    
-    
-    // for (int i = 0; i < 10; ++i)
-	// {
-	// 	Monster m = Monster::getRandomMonster();
-	// 	std::cout << "A " << m.getName() << " (" << m.getSimvol() << ") was created.\n";
-	// }
-
 	return 0;
 }
