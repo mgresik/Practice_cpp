@@ -87,9 +87,34 @@ Monster::MonsterData Monster::monsterData[Monster::MAX_TYPES]
 	{ "slime", 's', 1, 1, 10 }
 };
 
-void fightMonster()
+bool runAway()
 {
-    
+    return(getRandomNumber(0, 1));
+}
+
+void fightMonster(Monster* m, Player* p)
+{
+    std::cout << "Run or fight?";
+    char action;
+
+    while(true)
+        std::cin >> action;
+        
+        if (action = 'R')
+        {
+            if (getRandomNumber(0, 1))
+            {
+                break;
+            }
+            else
+            {
+                attackPlayer(Monster* m, Player* p);
+            };
+        }
+        else {
+            attackMonster(Monster* m, Player* p);
+        };
+    // Условия выхода из боя?  Смерть кого-то из бойцов
 }
 
 int main()
@@ -104,10 +129,12 @@ int main()
 
     Player p(playerName);
     std::cout << p.getName() << '\n';
-    while (!(p.isDead()))
+    while ((!(p.isDead())) || (!(p.getLvl() = 20)))
     {
         Monster m = Monster::getRandomMonster();
         std::cout << "You see a " << m.getName() << ' ' << m.getSimvol();
+
+        fightMonster()
         
 
     }
