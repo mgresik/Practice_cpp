@@ -100,14 +100,14 @@ void attackPlayer(Monster &m, Player& p)
 bool fightMonster(Monster& m, Player& p)
 {
     char action;
+
     std::cout << "Run or fight?";
     std::cin >> action;
-
     while(true)
-        
+    {
         switch (action)
         {
-        case 'R':
+        case 'r':
             if (getRandomNumber(0, 1))
             {
                 return true;
@@ -121,7 +121,7 @@ bool fightMonster(Monster& m, Player& p)
                 };
             };
             break;
-        case 'F':
+        case 'f':
             attackMonster(m, p);
             if (m.isDead())
             {
@@ -140,6 +140,7 @@ bool fightMonster(Monster& m, Player& p)
             std::cout << "Invailed. Try again!";
             break;
         };
+    };
 }
 
 int main()
@@ -156,15 +157,18 @@ int main()
     std::cout << p.getName() << '\n';
     while ((!(p.isDead())) || (!(p.getLvl() == 20)))
     {
+        std::cout << "Старт цикла";
         Monster m = Monster::getRandomMonster();
         std::cout << "You see a " << m.getName() << ' ' << m.getSimvol();
 
         if(fightMonster(m, p))
         {
             std::cout << "You win!";
+            continue;
         }
         else{
             std::cout << "you lose!";
+            break;
         }
     }
 	return 0;
