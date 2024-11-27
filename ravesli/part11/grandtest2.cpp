@@ -87,34 +87,59 @@ Monster::MonsterData Monster::monsterData[Monster::MAX_TYPES]
 	{ "slime", 's', 1, 1, 10 }
 };
 
-bool runAway()
+void attackMonster(Monster &m, Player &p)
 {
-    return(getRandomNumber(0, 1));
-}
+    m.reduceHealth(p.getDamage());
+};
 
-void fightMonster(Monster* m, Player* p)
+void attackPlayer(Monster &m, Player& p)
 {
-    std::cout << "Run or fight?";
+    p.reduceHealth(m.getDamage());
+};
+
+bool fightMonster(Monster& m, Player& p)
+{
     char action;
+    std::cout << "Run or fight?";
+    std::cin >> action;
 
     while(true)
-        std::cin >> action;
         
-        if (action = 'R')
+        switch (action)
         {
+        case 'R':
             if (getRandomNumber(0, 1))
             {
-                break;
+                return true;
             }
             else
             {
-                attackPlayer(Monster* m, Player* p);
+                attackPlayer(m, p);
+                if (p.isDead())
+                {
+                    return false;
+                };
             };
-        }
-        else {
-            attackMonster(Monster* m, Player* p);
+            break;
+        case 'F':
+            attackMonster(m, p);
+            if (m.isDead())
+            {
+                p.lvlUp();
+                p.addGold(m.getGold());
+                return true;
+            };
+
+            attackPlayer(m, p);
+            if (p.isDead())
+            {
+                return false;
+            };
+
+        default:
+            std::cout << "Invailed. Try again!";
+            break;
         };
-    // Условия выхода из боя?  Смерть кого-то из бойцов
 }
 
 int main()
@@ -129,14 +154,18 @@ int main()
 
     Player p(playerName);
     std::cout << p.getName() << '\n';
-    while ((!(p.isDead())) || (!(p.getLvl() = 20)))
+    while ((!(p.isDead())) || (!(p.getLvl() == 20)))
     {
         Monster m = Monster::getRandomMonster();
         std::cout << "You see a " << m.getName() << ' ' << m.getSimvol();
 
-        fightMonster()
-        
-
+        if(fightMonster(m, p))
+        {
+            std::cout << "You win!";
+        }
+        else{
+            std::cout << "you lose!";
+        }
     }
 	return 0;
 }
