@@ -9,7 +9,7 @@ int getRandomNumber(int min, int max)
 	return static_cast<int>(rand() * fraction * (max - min + 1) + min);
 }
 
-class Creature
+class Creature  // basic
 {
 protected:
     std::string m_name;
@@ -34,7 +34,7 @@ public:
     void addGold(int money) {m_gold += money;}
 };
 
-class Player : public Creature
+class Player : public Creature  // class a player
 {
 private:
     int m_level = 1;
@@ -51,7 +51,7 @@ public:
     bool hasWon() {return m_level >= 20;}
 };
 
-class Monster : public Creature
+class Monster : public Creature  // class a monsters
 {
 public:
     enum Type
@@ -80,7 +80,7 @@ public:
     }
 };
 
-Monster::MonsterData Monster::monsterData[Monster::MAX_TYPES]
+Monster::MonsterData Monster::monsterData[Monster::MAX_TYPES]  // matrix with monsters propertis
 {
 	{ "dragon", 'D', 20, 4, 100 },
 	{ "orc", 'o', 4, 2, 25 },
@@ -97,14 +97,16 @@ void attackPlayer(Monster &m, Player& p)
     p.reduceHealth(m.getDamage());
 };
 
-bool fightMonster(Monster& m, Player& p)
+bool fightMonster(Player& p)
 {
     char action;
 
-    std::cout << "Run or fight?";
-    std::cin >> action;
     while(true)
     {
+        Monster m = Monster::getRandomMonster();
+        std::cout << "You see a " << m.getName() << ' ' << m.getSimvol();
+        std::cout << "Run or fight?";
+        std::cin >> action;
         switch (action)
         {
         case 'r':
@@ -148,28 +150,14 @@ int main()
     srand(static_cast<unsigned int>(time(0)));
 	rand();
 
-    std::cout << "Welcome to my game!";
-    std::cout << "Enter the name of player \n";
+    std::cout << "Welcome to my game! " << "Enter the name of player \n";
     std::string playerName;
     std::cin >> playerName;
 
     Player p(playerName);
-    std::cout << p.getName() << '\n';
-    while ((!(p.isDead())) || (!(p.getLvl() == 20)))
-    {
-        std::cout << "Старт цикла";
-        Monster m = Monster::getRandomMonster();
-        std::cout << "You see a " << m.getName() << ' ' << m.getSimvol();
 
-        if(fightMonster(m, p))
-        {
-            std::cout << "You win!";
-            continue;
-        }
-        else{
-            std::cout << "you lose!";
-            break;
-        }
-    }
-	return 0;
+    std::cout << p.getName() << ", " << "are you ready?" << '\n';
+    
+    fightMonster(p);
+
 }
